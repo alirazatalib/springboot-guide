@@ -4,6 +4,7 @@ import com.guide.springboot.dtos.DoctorDTO;
 import com.guide.springboot.requests.DoctorRegistrationRequest;
 import com.guide.springboot.requests.DoctorUpdateRequest;
 import com.guide.springboot.services.DoctorService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class DoctorController {
     @PostMapping("/register")
     public ResponseEntity<String> saveDoctor(@RequestBody DoctorRegistrationRequest doctorRegistrationRequest) {
         doctorService.saveDoctor(doctorRegistrationRequest);
-        return ResponseEntity.ok("Doctor has been registered successfully!");
+        return new ResponseEntity<>("Doctor has been registered successfully!",HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
