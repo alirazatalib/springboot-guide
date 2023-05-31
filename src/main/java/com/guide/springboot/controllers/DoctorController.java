@@ -4,6 +4,7 @@ import com.guide.springboot.dtos.DoctorDTO;
 import com.guide.springboot.requests.DoctorRegistrationRequest;
 import com.guide.springboot.requests.DoctorUpdateRequest;
 import com.guide.springboot.services.DoctorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,9 @@ public class DoctorController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> saveDoctor(@RequestBody DoctorRegistrationRequest doctorRegistrationRequest) {
+    public ResponseEntity<String> saveDoctor(@Valid @RequestBody DoctorRegistrationRequest doctorRegistrationRequest) {
         doctorService.saveDoctor(doctorRegistrationRequest);
-        return new ResponseEntity<>("Doctor has been registered successfully!",HttpStatus.CREATED);
+        return new ResponseEntity<>("Doctor has been registered successfully!", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -42,7 +43,7 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateDoctorById(@PathVariable Integer id, @RequestBody DoctorUpdateRequest doctorUpdateRequest) {
+    public ResponseEntity<String> updateDoctorById(@PathVariable Integer id, @Valid @RequestBody DoctorUpdateRequest doctorUpdateRequest) {
         doctorService.updateDoctor(id, doctorUpdateRequest);
         return ResponseEntity.ok("Doctor with id [%s] has been updated successfully!".formatted(id));
     }
