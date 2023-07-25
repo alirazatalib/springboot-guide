@@ -10,6 +10,9 @@ import com.guide.springboot.requests.DoctorRegistrationRequest;
 import com.guide.springboot.requests.DoctorUpdateRequest;
 import com.guide.springboot.services.DoctorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +20,11 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
     private final DoctorDTOMapper doctorDTOMapper;
+//    private static final Logger logger = LoggerFactory.getLogger(DoctorServiceImpl.class);
 
     @Override
     public void saveDoctor(DoctorRegistrationRequest doctorRegistrationRequest) {
@@ -36,6 +41,8 @@ public class DoctorServiceImpl implements DoctorService {
                 doctorRegistrationRequest.address(),
                 doctorRegistrationRequest.specialization());
 
+//        logger.info("Doctor {}",doctor);
+        log.info("Doctor {}",doctor);
         doctorRepository.save(doctor);
     }
 
